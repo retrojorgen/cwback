@@ -16,6 +16,8 @@
         "express": "^4.14.0",
         "express-jwt": "^3.4.0",
         "jwks-rsa": "^1.2.0",
-        "mongoose": "^4.13.4"
+        "mongoose": "^4.13.4",
+        "react-day-picker": "^7.0.5",
+        "react-moment": "^0.6.8"
     }
 }

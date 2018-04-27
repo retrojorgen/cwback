@@ -2,7 +2,23 @@ const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 
 const request = require("request");
+const database = require('./database');
 
+
+
+const localAuth = function (req, res, next) {
+  if(req.user.sub) {
+    database.getUserFromSub(req.user.sub, function (foundUser) {
+      if(!foundUser) {
+      }
+      
+      req.databaseUser = foundUser;
+      next();
+    });
+  } else {
+    next();
+  }
+}
 
 const getUserInfo = function (authorization, callback) {
 
@@ -33,5 +49,6 @@ const authCheck = jwt({
 
 module.exports = {
   getUserInfo: getUserInfo,
-  authCheck: authCheck
+  authCheck: authCheck,
+  localAuth: localAuth
 }
